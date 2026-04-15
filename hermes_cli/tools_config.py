@@ -243,6 +243,14 @@ TOOL_CATEGORIES = {
                 "override_env_vars": ["FAL_KEY"],
             },
             {
+                "name": "MiniMax",
+                "badge": "paid",
+                "tag": "High-quality image generation with a variety of styles",
+                "env_vars": [
+                    {"key": "MINIMAX_API_KEY", "prompt": "MiniMax API key", "url": "https://platform.minimax.io/user-center/payment/token-plan"},
+                ],
+            },
+            {
                 "name": "FAL.ai",
                 "badge": "paid",
                 "tag": "FLUX 2 Pro with auto-upscaling",
@@ -814,7 +822,7 @@ def _toolset_needs_configuration_prompt(ts_key: str, config: dict) -> bool:
         browser_cfg = config.get("browser", {})
         return not isinstance(browser_cfg, dict) or "cloud_provider" not in browser_cfg
     if ts_key == "image_gen":
-        return not get_env_value("FAL_KEY")
+        return not get_env_value("FAL_KEY") and not get_env_value("MINIMAX_API_KEY")
 
     return not _toolset_has_keys(ts_key, config)
 
