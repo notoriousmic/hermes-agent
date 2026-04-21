@@ -6297,6 +6297,18 @@ class GatewayRunner:
                             image_path=file_path,
                             metadata=_thread_meta,
                         )
+                    elif ext in _VIDEO_EXTS:
+                        await adapter.send_video(
+                            chat_id=event.source.chat_id,
+                            video_path=file_path,
+                            metadata=_thread_meta,
+                        )
+                    elif ext in _AUDIO_EXTS:
+                        await adapter.send_voice(
+                            chat_id=event.source.chat_id,
+                            audio_path=file_path,
+                            metadata=_thread_meta,
+                        )
                     else:
                         await adapter.send_document(
                             chat_id=event.source.chat_id,
